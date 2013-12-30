@@ -5,9 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-/**
- * Created by Natalia on 30/12/13.
- */
 public class MainWindow extends JFrame {
     public MainWindow() throws HeadlessException {
         getRootPane().setLayout(new BoxLayout(getRootPane(),BoxLayout.Y_AXIS));
@@ -22,6 +19,9 @@ public class MainWindow extends JFrame {
             JLabel jLabelImage = new JLabel();
             jLabelImage.setIcon(new ImageIcon(Picture));
             getRootPane().add(jLabelImage);
+
+            InputPanel inputPanel = new InputPanel();
+            getRootPane().add(inputPanel);
         }
         catch (Exception e)
         {
