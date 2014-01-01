@@ -22,6 +22,9 @@ public class MainWindow extends JFrame {
 
             InputPanel inputPanel = new InputPanel();
             getRootPane().add(inputPanel);
+
+            ResultsPanel resultsPanel = new ResultsPanel();
+            getRootPane().add(resultsPanel);
         }
         catch (Exception e)
         {
