@@ -1,7 +1,8 @@
 package pl.smart4travel.view;
 
 import org.jdesktop.swingx.JXDatePicker;
-import pl.smart4travel.model.ReadXMLFile;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import pl.smart4travel.model.Model;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,16 +23,23 @@ public class InputPanel extends JPanel {
     private final JSpinner.DateEditor timeEditor;
 
     public InputPanel() {
+        Model rxf = new Model();
+        rxf.read();
+
         inputPanelListenerList = new ArrayList<>();
         GridBagLayout gbl = new GridBagLayout();
         setLayout(gbl);
 
         add(new JLabel("Z:"), createConstraints(1, 1, false));
-        from = new JComboBox();
+        from = new JComboBox(rxf.getStopsList().toArray());
+        from.setMaximumRowCount(12);
+        AutoCompleteDecorator.decorate(from);
         add(from, createConstraints(1, 2, true));
 
         add(new JLabel("Do:"), createConstraints(1, 3, false));
-        to = new JComboBox();
+        to = new JComboBox(rxf.getStopsList().toArray());
+        to.setMaximumRowCount(12);
+        AutoCompleteDecorator.decorate(to);
         add(to, createConstraints(1, 4, true));
 
         add(new JLabel("Data:"), createConstraints(2, 1, false));
@@ -77,8 +85,5 @@ public class InputPanel extends JPanel {
         for (InputPanelListener listener :inputPanelListenerList) {
             listener.onSubmit(from.getSelectedItem().toString(), to.getSelectedItem().toString(), date );
         }
-
-        ReadXMLFile rxf = new ReadXMLFile();
-        rxf.read();
     }
 }

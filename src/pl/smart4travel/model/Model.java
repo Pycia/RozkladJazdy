@@ -4,19 +4,31 @@ package pl.smart4travel.model;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
-public class ReadXMLFile {
+public class Model {
     private List<Line> lineList;
 
-    public ReadXMLFile() {
+    public Model() {
         lineList = new ArrayList<Line>();
+    }
+
+    public List<Line> getLineList() {
+        return lineList;
+    }
+
+    public Set<String> getStopsList() {
+        Set<String> stopsList = new TreeSet<>();
+        for(Line line: lineList)
+            for (Stop stop : line.getStops()) {
+               stopsList.add(stop.getId());
+            }
+        return stopsList;
     }
 
     public void read() {
@@ -30,7 +42,6 @@ public class ReadXMLFile {
 
             if(lines != null && lines.getLength()>0)
             {
-                List<Line> lineList = new ArrayList<>();
                 for(int i=0; i<lines.getLength(); i++)
                 {
                     Element line = (Element)lines.item(i);
@@ -64,7 +75,6 @@ public class ReadXMLFile {
                     concreteLine.setId(line.getAttribute("id"));
                     concreteLine.setStops(stopsList);
                     lineList.add(concreteLine);
-                    System.out.println(lineList.get(i).getId());
                 }
 
             }

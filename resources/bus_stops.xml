@@ -1,0 +1,147 @@
+<data>
+	<line id="1">
+		<direction>
+			<stop id="Wzgórza Krzesławickie">
+				<time>
+					<hour>07</hour>
+					<min>00</min> 
+				</time>
+				<time>
+					<hour>08</hour>
+					<min>00</min> 
+				</time>
+			</stop>
+			
+			<stop id="Biprostal">
+				<time>
+					<hour>07</hour>
+					<min>30</min> 
+				</time>
+				<time>
+					<hour>08</hour>
+					<min>30</min> 
+				</time>
+			</stop>
+			
+			<stop id="Mazowiecka">
+				<time>
+					<hour>08</hour>
+					<min>00</min> 
+				</time>
+				<time>
+					<hour>09</hour>
+					<min>00</min> 
+				</time>
+			</stop>
+		</direction>
+		
+		<direction>
+			<stop id="Mazowiecka">
+				<time>
+					<hour>14</hour>
+					<min>00</min> 
+				</time>
+				<time>
+					<hour>15</hour>
+					<min>00</min> 
+				</time>
+			</stop>
+			
+			<stop id="Biprostal">
+				<time>
+					<hour>15</hour>
+					<min>30</min> 
+				</time>
+				<time>
+					<hour>16</hour>
+					<min>30</min> 
+				</time>
+			</stop>
+			
+			<stop id="Wzgórza Krzesławickie">
+				<time>
+					<hour>16</hour>
+					<min>00</min> 
+				</time>
+				<time>
+					<hour>17</hour>
+					<min>00</min> 
+				</time>
+			</stop>
+
+		</direction>
+	</line>
+	<line id="2">
+		<direction>
+			<stop id="Urzędnicza">
+				<time>
+					<hour>07</hour>
+					<min>00</min> 
+				</time>
+				<time>
+					<hour>08</hour>
+					<min>00</min> 
+				</time>
+			</stop>
+			
+			<stop id="Batorego">
+				<time>
+					<hour>07</hour>
+					<min>30</min> 
+				</time>
+				<time>
+					<hour>08</hour>
+					<min>30</min> 
+				</time>
+			</stop>
+			
+			<stop id="Bagatela">
+				<time>
+					<hour>08</hour>
+					<min>00</min> 
+				</time>
+				<time>
+					<hour>09</hour>
+					<min>00</min> 
+				</time>
+			</stop>
+		</direction>
+		
+		<direction>
+			<stop id="Bagatela">
+				<time>
+					<hour>14</hour>
+					<min>00</min> 
+				</time>
+				<time>
+					<hour>15</hour>
+					<min>00</min> 
+				</time>
+			</stop>
+			
+			<stop id="Batorego">
+				<time>
+					<hour>15</hour>
+					<min>30</min> 
+				</time>
+				<time>
+					<hour>16</hour>
+					<min>30</min> 
+				</time>
+			</stop>
+			
+			<stop id="Urzędnicza">
+				<time>
+					<hour>16</hour>
+					<min>00</min> 
+				</time>
+				<time>
+					<hour>17</hour>
+					<min>00</min> 
+				</time>
+			</stop>
+
+		</direction>
+		
+	</line>
+</data>

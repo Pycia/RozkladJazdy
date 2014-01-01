@@ -11,7 +11,7 @@ public class MainWindow extends JFrame {
                 GridBagConstraints.HORIZONTAL, new Insets(padding, padding, padding, padding), 0, 0);
     }
     public MainWindow() throws HeadlessException {
-        getRootPane().setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
         try
         {
             // Read from a file
@@ -22,13 +22,13 @@ public class MainWindow extends JFrame {
             //Show the image inside the label
             JLabel jLabelImage = new JLabel();
             jLabelImage.setIcon(new ImageIcon(Picture));
-            getRootPane().add(jLabelImage, createConstraints(1, false, 0));
+            add(jLabelImage, createConstraints(1, false, 0));
 
             InputPanel inputPanel = new InputPanel();
-            getRootPane().add(inputPanel, createConstraints(2, false, 10));
+            add(inputPanel, createConstraints(2, false, 10));
 
             ResultsPanel resultsPanel = new ResultsPanel();
-            getRootPane().add(resultsPanel, createConstraints(3, true, 0));
+            add(resultsPanel, createConstraints(3, true, 0));
         }
         catch (Exception e)
         {
