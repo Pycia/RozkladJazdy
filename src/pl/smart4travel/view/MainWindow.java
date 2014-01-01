@@ -6,8 +6,12 @@ import java.awt.*;
 import java.io.File;
 
 public class MainWindow extends JFrame {
+    private GridBagConstraints createConstraints(int y, boolean stretch, int padding) {
+        return new GridBagConstraints(1, y, 1, 1, 1, stretch ? 1 : 0, GridBagConstraints.CENTER,
+                GridBagConstraints.HORIZONTAL, new Insets(padding, padding, padding, padding), 0, 0);
+    }
     public MainWindow() throws HeadlessException {
-        getRootPane().setLayout(new BoxLayout(getRootPane(),BoxLayout.Y_AXIS));
+        getRootPane().setLayout(new GridBagLayout());
         try
         {
             // Read from a file
@@ -18,13 +22,13 @@ public class MainWindow extends JFrame {
             //Show the image inside the label
             JLabel jLabelImage = new JLabel();
             jLabelImage.setIcon(new ImageIcon(Picture));
-            getRootPane().add(jLabelImage);
+            getRootPane().add(jLabelImage, createConstraints(1, false, 0));
 
             InputPanel inputPanel = new InputPanel();
-            getRootPane().add(inputPanel);
+            getRootPane().add(inputPanel, createConstraints(2, false, 10));
 
             ResultsPanel resultsPanel = new ResultsPanel();
-            getRootPane().add(resultsPanel);
+            getRootPane().add(resultsPanel, createConstraints(3, true, 0));
         }
         catch (Exception e)
         {
