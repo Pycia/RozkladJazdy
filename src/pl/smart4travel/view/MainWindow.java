@@ -29,6 +29,7 @@ public class MainWindow extends JFrame {
 
             ResultsPanel resultsPanel = new ResultsPanel();
             add(resultsPanel, createConstraints(3, true, 0));
+            inputPanel.addListener(resultsPanel);
         }
         catch (Exception e)
         {

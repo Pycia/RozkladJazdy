@@ -16,14 +16,14 @@ public class InputPanel extends JPanel {
     private List<InputPanelListener> inputPanelListenerList;
     private final JComboBox from;
     private final JComboBox to;
-    private final JXDatePicker date;
 
     private final JButton okButton;
     private final JSpinner timeSpinner;
     private final JSpinner.DateEditor timeEditor;
+    private final Model rxf;
 
     public InputPanel() {
-        Model rxf = new Model();
+        rxf = new Model();
         rxf.read();
 
         inputPanelListenerList = new ArrayList<>();
@@ -42,21 +42,16 @@ public class InputPanel extends JPanel {
         AutoCompleteDecorator.decorate(to);
         add(to, createConstraints(1, 4, true));
 
-        add(new JLabel("Data:"), createConstraints(2, 1, false));
-        date = new JXDatePicker();
-        date.setDate(new Date());
-        add(date, createConstraints(2, 2, true));
-
-        add(new JLabel("Godzina:"), createConstraints(2, 3, false));
+        add(new JLabel("Godzina:"), createConstraints(2, 1, false));
         timeSpinner = new JSpinner( new SpinnerDateModel() );
         timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm");
         timeSpinner.setEditor(timeEditor);
         timeSpinner.setValue(new Date());
-        add(timeSpinner, createConstraints(2, 4, true));
+        add(timeSpinner, createConstraints(2, 2, true));
 
         okButton = new JButton();
         okButton.setText("OK");
-        add(okButton, createConstraints(3, 4, true));
+        add(okButton, createConstraints(2, 4, true));
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -75,15 +70,12 @@ public class InputPanel extends JPanel {
     }
 
     public void fireOnSubmit() {
-        Date date = new Date();
-        date.setTime(this.date.getDate().getTime());
         String time = timeSpinner.getValue().toString();
         int hour =Integer.parseInt(time.substring(11,13));
         int minute =Integer.parseInt(time.substring(14,16));
-        date.setTime(this.date.getDate().getTime() + (hour*60*60 + minute*60)*1000);
 
         for (InputPanelListener listener :inputPanelListenerList) {
-            listener.onSubmit(from.getSelectedItem().toString(), to.getSelectedItem().toString(), date );
+            listener.onSubmit(from.getSelectedItem().toString(), to.getSelectedItem().toString(), (hour*60*60 + minute*60)*1000, rxf );
         }
     }
 }

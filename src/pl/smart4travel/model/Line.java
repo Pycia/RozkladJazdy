@@ -5,14 +5,12 @@ import java.util.List;
 
 public class Line {
     private String id;
-    private List<Stop> stops;
-
+    private List<Direction> directionList;
 
     public Line() {
         id = new String();
-        stops = new ArrayList<Stop>();
+        directionList = new ArrayList<>();
     }
-
 
     public void setId(String id) {
         this.id = id;
@@ -22,11 +20,11 @@ public class Line {
         return id;
     }
 
-    public List<Stop> getStops() {
-        return stops;
+    public List<Direction> getDirectionList() {
+        return directionList;
     }
 
-    public void setStops(List<Stop> stops) {
-        this.stops = stops;
+    public void setDirections(List<Direction> directionList) {
+        this.directionList=directionList;
     }
 }

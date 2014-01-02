@@ -3,6 +3,7 @@ package pl.smart4travel.model;
 import java.util.List;
 
 public class Stop {
+    private String lineId;
     private String id;
     private List<Time> timeList;
 
@@ -20,5 +21,13 @@ public class Stop {
 
     public void setTimeList(List<Time> timeList) {
         this.timeList = timeList;
+    }
+
+    public String getLineId() {
+        return lineId;
+    }
+
+    public void setLineId(String lineId) {
+        this.lineId = lineId;
     }
 }

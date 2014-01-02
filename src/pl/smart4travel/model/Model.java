@@ -25,11 +25,14 @@ public class Model {
     public Set<String> getStopsList() {
         Set<String> stopsList = new TreeSet<>();
         for(Line line: lineList)
-            for (Stop stop : line.getStops()) {
-               stopsList.add(stop.getId());
-            }
+            for(Direction direction: line.getDirectionList())
+                for (Stop stop : direction.getStops()) {
+                   stopsList.add(stop.getId());
+                }
         return stopsList;
     }
+
+
 
     public void read() {
 
@@ -46,13 +49,13 @@ public class Model {
                 {
                     Element line = (Element)lines.item(i);
                     NodeList directions = line.getElementsByTagName("direction");
-                    List<Stop> stopsList = new ArrayList<>();
+                    List<Direction> directionList = new ArrayList<>();
 
                     for(int j=0; j<directions.getLength(); j++)
                     {
                         Element direction = (Element)directions.item(j);
                         NodeList stops = direction.getElementsByTagName("stop");
-
+                        List<Stop> stopsList = new ArrayList<>();
 
                         for(int k=0; k<stops.getLength(); k++)
                         {
@@ -67,13 +70,17 @@ public class Model {
                             }
                             Stop concreteStop = new Stop();
                             concreteStop.setId(stop.getAttribute("id"));
+                            concreteStop.setLineId(line.getAttribute("id"));
                             concreteStop.setTimeList(timeList);
                             stopsList.add(concreteStop);
                         }
+                        Direction concreteDirection = new Direction();
+                        concreteDirection.setStops(stopsList);
+                        directionList.add(concreteDirection);
                     }
                     Line concreteLine = new Line();
                     concreteLine.setId(line.getAttribute("id"));
-                    concreteLine.setStops(stopsList);
+                    concreteLine.setDirections(directionList);
                     lineList.add(concreteLine);
                 }
 
