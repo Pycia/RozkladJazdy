@@ -34,7 +34,7 @@ public class Model {
 
 
 
-    public void read() {
+    public boolean read() {
 
         try {
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -87,7 +87,45 @@ public class Model {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+           return false;
         }
+        return true;
+    }
+
+    public Route findRoute(String from, String to, int date) {
+
+        Stop currentStop= new Stop();
+        Date currentDate = new Date();
+        Route route = new Route();
+        List<Time> timeList = new ArrayList<>();
+        for(Line line:this.getLineList())
+        {
+            boolean ok=false;
+            boolean isTime=false;
+            for(Direction direction:line.getDirectionList())
+                for (Stop stop : direction.getStops()) {
+                    if (stop.getId().equals(from)) {
+                        ok = true;
+                        currentStop=stop;
+                    } else
+                    if (ok && stop.getId().equals(to)) {
+                        int i=0;
+                        route.setLineId(stop.getLineId());
+                        for (Time time : currentStop.getTimeList()) {
+                            currentDate.setTime((time.getHour()*60*60 + time.getMinute()*60)*1000);
+                            if(currentDate.getTime()>= date-60*60*1000 && currentDate.getTime()<=date +60*60*1000){
+                                timeList.add(time);
+                                i++;
+                            }
+                        }
+                        route.setTimeList(timeList);
+                        return route;
+                    }
+                }
+            ok=false;
+        }
+        route.setTimeList(timeList);
+        return route;
     }
 }
+

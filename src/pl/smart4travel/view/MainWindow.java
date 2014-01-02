@@ -1,5 +1,7 @@
 package pl.smart4travel.view;
 
+import pl.smart4travel.model.Model;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -24,12 +26,18 @@ public class MainWindow extends JFrame {
             jLabelImage.setIcon(new ImageIcon(Picture));
             add(jLabelImage, createConstraints(1, false, 0));
 
-            InputPanel inputPanel = new InputPanel();
+            final Model model = new Model();
+            InputPanel inputPanel = new InputPanel(model);
             add(inputPanel, createConstraints(2, false, 10));
 
-            ResultsPanel resultsPanel = new ResultsPanel();
+            final ResultsPanel resultsPanel = new ResultsPanel();
             add(resultsPanel, createConstraints(3, true, 0));
-            inputPanel.addListener(resultsPanel);
+            inputPanel.addListener(new InputPanelListener() {
+                @Override
+                public void onSubmit(String from, String to, int date) {
+                    resultsPanel.setResult(model.findRoute(from, to, date));
+                }
+            });
         }
         catch (Exception e)
         {

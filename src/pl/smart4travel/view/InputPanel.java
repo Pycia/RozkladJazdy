@@ -14,30 +14,29 @@ import java.util.List;
 
 public class InputPanel extends JPanel {
     private List<InputPanelListener> inputPanelListenerList;
-    private final JComboBox from;
-    private final JComboBox to;
+    private JComboBox from;
+    private JComboBox to;
 
-    private final JButton okButton;
-    private final JSpinner timeSpinner;
-    private final JSpinner.DateEditor timeEditor;
-    private final Model rxf;
+    private JButton okButton;
+    private JSpinner timeSpinner;
+    private JSpinner.DateEditor timeEditor;
 
-    public InputPanel() {
-        rxf = new Model();
-        rxf.read();
+
+    public InputPanel(Model model) {
+        if(model.read()){
 
         inputPanelListenerList = new ArrayList<>();
         GridBagLayout gbl = new GridBagLayout();
         setLayout(gbl);
 
         add(new JLabel("Z:"), createConstraints(1, 1, false));
-        from = new JComboBox(rxf.getStopsList().toArray());
+        from = new JComboBox(model.getStopsList().toArray());
         from.setMaximumRowCount(12);
         AutoCompleteDecorator.decorate(from);
         add(from, createConstraints(1, 2, true));
 
         add(new JLabel("Do:"), createConstraints(1, 3, false));
-        to = new JComboBox(rxf.getStopsList().toArray());
+        to = new JComboBox(model.getStopsList().toArray());
         to.setMaximumRowCount(12);
         AutoCompleteDecorator.decorate(to);
         add(to, createConstraints(1, 4, true));
@@ -58,6 +57,11 @@ public class InputPanel extends JPanel {
                 fireOnSubmit();
             }
         });
+        } else {
+            JTextField jtf = new JTextField("Błąd wczytywania danych z pliku");
+            add(jtf);
+        }
+
     }
 
     private GridBagConstraints createConstraints(int row, int column, boolean stretch) {
@@ -75,7 +79,7 @@ public class InputPanel extends JPanel {
         int minute =Integer.parseInt(time.substring(14,16));
 
         for (InputPanelListener listener :inputPanelListenerList) {
-            listener.onSubmit(from.getSelectedItem().toString(), to.getSelectedItem().toString(), (hour*60*60 + minute*60)*1000, rxf );
+            listener.onSubmit(from.getSelectedItem().toString(), to.getSelectedItem().toString(), (hour*60*60 + minute*60)*1000);
         }
     }
 }
